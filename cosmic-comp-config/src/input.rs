@@ -53,11 +53,11 @@ pub struct ScrollConfig {
 
 #[derive(Clone, Debug, Default, PartialEq, Deserialize, Serialize)]
 pub struct GestureConfig {
-    pub ThreeFingerAny: Option<GestureAction>,
-    pub FourFingerDown: Option<GestureAction>,
-    pub FourFingerLeft: Option<GestureAction>,
-    pub FourFingerUp: Option<GestureAction>,
-    pub FourFingerRight: Option<GestureAction>,
+    pub three_finger_any: Option<GestureAction>,
+    pub four_finger_down: Option<GestureAction>,
+    pub four_finger_left: Option<GestureAction>,
+    pub four_finger_up: Option<GestureAction>,
+    pub four_finger_right: Option<GestureAction>,
 }
 
 #[derive(Copy, Clone, Debug, PartialEq, Serialize, Deserialize)]
