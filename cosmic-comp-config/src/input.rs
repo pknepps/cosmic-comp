@@ -31,6 +31,8 @@ pub struct InputConfig {
     pub tap_config: Option<TapConfig>,
     #[serde(skip_serializing_if = "Option::is_none", default)]
     pub map_to_output: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none", default)]
+    pub gesture_config: Option<GestureConfig>,
 }
 
 #[derive(Clone, Debug, Default, PartialEq, Deserialize, Serialize)]
@@ -47,6 +49,15 @@ pub struct ScrollConfig {
     pub natural_scroll: Option<bool>,
     pub scroll_button: Option<u32>,
     pub scroll_factor: Option<f64>,
+}
+
+#[derive(Clone, Debug, Default, PartialEq, Deserialize, Serialize)]
+pub struct GestureConfig {
+    pub ThreeFingerAny: Option<GestureAction>,
+    pub FourFingerDown: Option<GestureAction>,
+    pub FourFingerLeft: Option<GestureAction>,
+    pub FourFingerUp: Option<GestureAction>,
+    pub FourFingerRight: Option<GestureAction>,
 }
 
 #[derive(Copy, Clone, Debug, PartialEq, Serialize, Deserialize)]
@@ -212,3 +223,13 @@ mod TapButtonMapDef {
         Option::serialize(&arg, ser)
     }
 }
+
+/// Possible gesture actions
+#[derive(Debug, Serialize, Deserialize, Clone, PartialEq)]
+pub enum GestureAction {
+    OpenApplicationLibrary,
+    OpenWorkspacesView,
+    SwitchBetweenWindows,
+    SwitchToNextWorkspace,
+    SwitchToPrevWorkspace,
+} 

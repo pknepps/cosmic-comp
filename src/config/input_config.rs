@@ -1,5 +1,5 @@
 use smithay::reexports::input::{
-    Device as InputDevice, DeviceConfigError, ScrollMethod, SendEventsMode,
+    Device as InputDevice, DeviceConfigError, ScrollMethod, SendEventsMode, DeviceCapability
 };
 use tracing::warn;
 
@@ -80,6 +80,17 @@ pub fn for_device(device: &InputDevice) -> InputConfig {
             None
         },
         map_to_output: None,
+        gesture_config: if device.has_capability(DeviceCapability::Gesture) {
+            Some(GestureConfig {
+                ThreeFingerAny: Some(GestureAction::SwitchBetweenWindows),
+                FourFingerDown: Some(GestureAction::SwitchToPrevWorkspace),
+                FourFingerUp: Some(GestureAction::SwitchToNextWorkspace),
+                FourFingerLeft: Some(GestureAction::OpenWorkspacesView),
+                FourFingerRight: Some(GestureAction::OpenApplicationLibrary),
+            })
+        } else {
+            None
+        },
     }
 }
 
